@@ -6,7 +6,6 @@ cursor = connection.cursor()
 
 cursor.execute(""" 
             CREATE TABLE IF NOT EXISTS People (
-                Number INTEGER PRIMARY KEY,
                 Name TEXT NOT NULL,
                 Age INTEGER 
             )
@@ -15,13 +14,15 @@ cursor.execute("""
 connection.commit()
 
 
-numple = 1
-nameple = "Harry"
-ageple = 23
 
 
-def addding_task():
-    cursor.execute('INSERT INTO People (Number,Name,Age) VALUES (?,?,?) ', (numple,nameple,ageple) )
+
+def adding_task(a,b):
+    global nameple, ageple
+    a = nameple
+    b = ageple 
+    cursor.execute('INSERT INTO People (Name,Age) VALUES (?,?) ', (a,b) )
+    connection.commit()
 
 
 
@@ -30,7 +31,35 @@ while True:
     start = "y"
     nstart = "n"
     entering = input("do u wanna start? [y/n]: ")
+    
     if entering == start: 
             print(" making new task: ")
-            nample = input("Enter task:")
+            nameple = input("Enter task: ")
+            ageple = input("Enter age: ")
+            adding_task(nameple,ageple)
+    connection.close()
+    
+    if entering == "n":
+        print(" What do u want to do?")
+        entering = str(input(" Enter: "))
+        
+        if entering == "complete":
+            print("which task? : ")
+            deluser =  int(input(" Which task is completed?: "))
+            rows = cursor.fetchall()
             
+            for row in rows:
+                print(f" Task № {row[0]} is {row[1]}, age: {row[2]}  ")
+            
+            while True:
+                deleter = (input(" Enter task number to complete: "))
+                
+                if deleter == "no":
+                    break
+                
+                elif deleter != "no":
+                    deleter = int(deleter)
+                    cursor.execute("DELETE FROM People WHERE id = ? ", (deleter) )
+                    connection.commit()
+                    print(f" task №{deleter} is completed ")
+                    

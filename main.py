@@ -9,7 +9,7 @@ cursor = connection.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     tasknumber INTEGER PRIMARY KEY AUTOINCREMENT,
-    task TEXT NOT NULL
+    task TEXT NOT NULL,
     completed INTEGER
 )
 
