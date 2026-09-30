@@ -1,8 +1,7 @@
 import sqlite3
 
 connection = sqlite3.connect('new_db_for_test.db')
-connection.close()
-cursor = connection.cursor
+cursor = connection.cursor()
 
 
 cursor.execute(""" 
@@ -14,13 +13,24 @@ cursor.execute("""
             """)
 
 connection.commit()
-connection.close()
+
 
 numple = 1
 nameple = "Harry"
 ageple = 23
 
 
-cursor.execute('INSERT INTO People (Number,Name,Age) VALUES (?,?,?) ', (numple,nameple,ageple) )
-connection.commit()
-connection.close()
+def addding_task():
+    cursor.execute('INSERT INTO People (Number,Name,Age) VALUES (?,?,?) ', (numple,nameple,ageple) )
+
+
+
+while True:
+    print(" Welcome to ttdl: ")
+    start = "y"
+    nstart = "n"
+    entering = input("do u wanna start? [y/n]: ")
+    if entering == start: 
+            print(" making new task: ")
+            nample = input("Enter task:")
+            
