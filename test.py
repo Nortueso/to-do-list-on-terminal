@@ -44,12 +44,13 @@ while True:
         entering = str(input(" Enter: "))
         
         if entering == "complete":
-            print("which task? : ")
-            deluser =  int(input(" Which task is completed?: "))
+            print(" Choose ")
             rows = cursor.fetchall()
-            
+                        
             for row in rows:
                 print(f" Task № {row[0]} is {row[1]}, age: {row[2]}  ")
+            deluser =  int(input(" Which task is completed?: "))
+            
             
             while True:
                 deleter = (input(" Enter task number to complete: "))
